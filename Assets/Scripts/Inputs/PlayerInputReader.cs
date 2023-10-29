@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputReader : MonoBehaviour, PlayerControls.IPlayerActions
 {
-    public event Action TargetPressed;
-
     PlayerControls controls;
+
+    public event Action TargetPressed;
+    public Vector2 MovementValue {  get; private set; }
 
     void Start()
     {
@@ -33,4 +34,14 @@ public class PlayerInputReader : MonoBehaviour, PlayerControls.IPlayerActions
         TargetPressed?.Invoke();
     }
 
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        MovementValue = context.ReadValue<Vector2>();
+        //Debug.Log(MovementValue);
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        
+    }
 }
